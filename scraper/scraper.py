@@ -19,8 +19,17 @@ def get_citations_needed_count(url):
 #Create function named get_citations_needed_report
 #takes in a url string and returns a report string
 #the string should be formatted with each citation listed in the order found.
-def get_citations_needed_report():
-    pass
+def get_citations_needed_report(url):
+    soup = BeautifulSoup(response.text, "html.parser")
+    get_citation = soup.findAll("p")
+    results = []
+    for citation in get_citation:
+        if "citation needed" in citation.getText():
+            results.append(citation.text)
+    print(results)
+
+
+
 
 
 if __name__ =='__main__':
@@ -29,3 +38,4 @@ if __name__ =='__main__':
     #results = parse(response.text)
     #print(results)
     print(get_citations_needed_count(url))
+    print(get_citations_needed_report(url))
